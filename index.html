@@ -1,1187 +1,808 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>شہنشاہ موبائلز | Hub Chowki</title>
+<title>Shahenshah Mobile Zone</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,"Noto Nastaliq Urdu",sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    background:#f5f7fb;
-    color:#172033;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#07152f;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-header{
-    background:#071a3d;
-    color:white;
-    position:sticky;
-    top:0;
-    z-index:999;
-    box-shadow:0 3px 15px rgba(0,0,0,.2);
+/* ---------- BACKGROUND ---------- */
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,180,255,.18),transparent 30%),
+    radial-gradient(circle at 80% 40%,rgba(150,70,255,.18),transparent 30%),
+    radial-gradient(circle at 50% 90%,rgba(0,255,180,.12),transparent 30%);
+  pointer-events:none;
+  z-index:-2;
 }
+
+body:after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:rgba(0,174,255,.08);
+  filter:blur(80px);
+  top:-200px;
+  right:-200px;
+  z-index:-1;
+}
+
+/* ---------- NAVBAR ---------- */
 
 .navbar{
-    max-width:1200px;
-    margin:auto;
-    padding:15px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,18,45,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.12);
+  padding:15px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
-    font-size:23px;
-    font-weight:bold;
-    white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.5px;
 }
 
-.menu{
-    display:flex;
-    align-items:center;
-    gap:6px;
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#00c6ff,#7b2cff);
+  box-shadow:0 0 25px rgba(0,190,255,.4);
 }
 
-.menu a,
-.dropbtn{
-    color:white;
-    text-decoration:none;
-    border:0;
-    background:none;
-    cursor:pointer;
-    padding:9px 10px;
-    font-size:14px;
+.nav-buttons{
+  display:flex;
+  gap:8px;
 }
 
-.menu a:hover,
-.dropbtn:hover{
-    background:rgba(255,255,255,.12);
-    border-radius:8px;
+.lang-btn{
+  border:1px solid rgba(255,255,255,.3);
+  background:transparent;
+  color:#fff;
+  padding:9px 15px;
+  border-radius:25px;
+  cursor:pointer;
 }
 
-/* Dropdown */
-
-.dropdown{
-    position:relative;
+.lang-btn.active{
+  background:#fff;
+  color:#07152f;
 }
 
-.dropdown-content{
-    display:none;
-    position:absolute;
-    right:0;
-    top:42px;
-    background:white;
-    min-width:190px;
-    border-radius:10px;
-    box-shadow:0 8px 25px rgba(0,0,0,.2);
-    overflow:hidden;
-}
-
-.dropdown-content a{
-    display:block;
-    color:#172033;
-    padding:11px 15px;
-}
-
-.dropdown-content a:hover{
-    background:#eef3ff;
-}
-
-.dropdown:hover .dropdown-content{
-    display:block;
-}
-
-/* Language */
-
-.language{
-    display:flex;
-    gap:5px;
-}
-
-.language button{
-    border:1px solid rgba(255,255,255,.4);
-    background:transparent;
-    color:white;
-    padding:6px 9px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.language button.active{
-    background:white;
-    color:#071a3d;
-}
-
-/* Mobile menu */
-
-.mobile-menu-btn{
-    display:none;
-    background:none;
-    border:0;
-    color:white;
-    font-size:27px;
-    cursor:pointer;
-}
-
-/* Hero */
+/* ---------- HERO ---------- */
 
 .hero{
-    min-height:80vh;
-    background:linear-gradient(135deg,#071a3d,#1554a0);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:50px 20px;
+  min-height:88vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:70px 20px;
+  position:relative;
 }
 
 .hero-content{
-    max-width:850px;
+  max-width:900px;
+  animation:heroIn 1.4s ease both;
+}
+
+.welcome{
+  display:inline-block;
+  padding:9px 18px;
+  border-radius:30px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  margin-bottom:22px;
+  color:#79dcff;
+  font-weight:bold;
 }
 
 .hero h1{
-    font-size:clamp(40px,7vw,70px);
-    margin-bottom:15px;
+  font-size:clamp(40px,8vw,82px);
+  line-height:1.02;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#fff,#66ddff,#b77cff,#fff);
+  background-size:300%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:gradientMove 6s linear infinite;
 }
 
 .hero p{
-    font-size:19px;
-    color:#dbeafe;
-    margin-bottom:30px;
+  color:#b9c8df;
+  font-size:18px;
+  line-height:1.7;
+  max-width:700px;
+  margin:auto;
+}
+
+.hero-buttons{
+  margin-top:35px;
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
 }
 
 .btn{
-    display:inline-block;
-    padding:13px 24px;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-    margin:5px;
+  display:inline-block;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  padding:14px 24px;
+  border-radius:14px;
+  font-weight:800;
+  transition:.3s;
 }
 
-.btn-whatsapp{
-    background:#25d366;
-    color:white;
+.btn-primary{
+  background:linear-gradient(135deg,#00c6ff,#7b2cff);
+  color:#fff;
+  box-shadow:0 12px 35px rgba(70,100,255,.3);
 }
 
-.btn-light{
-    background:white;
-    color:#071a3d;
+.btn-secondary{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.18);
 }
 
-/* Sections */
+.btn:hover{
+  transform:translateY(-4px) scale(1.02);
+}
+
+/* ---------- SECTIONS ---------- */
 
 section{
-    padding:70px 6%;
+  padding:80px 5%;
 }
 
-.title{
-    text-align:center;
-    margin-bottom:40px;
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
 }
 
-.title h2{
-    font-size:35px;
-    margin-bottom:8px;
+.section-title h2{
+  font-size:clamp(32px,6vw,52px);
+  margin-bottom:12px;
 }
 
-.title p{
-    color:#64748b;
+.section-title p{
+  color:#9eafc9;
 }
 
-/* Categories */
+/* ---------- PHONE BOX ---------- */
 
-.categories{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
+.phone-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:22px;
 }
 
-.category{
-    background:white;
-    padding:30px 15px;
-    text-align:center;
-    border-radius:18px;
-    box-shadow:0 6px 22px rgba(15,23,42,.08);
-    text-decoration:none;
-    color:#172033;
-    transition:.3s;
+.brand-card{
+  position:relative;
+  overflow:hidden;
+  padding:25px;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 20px 50px rgba(0,0,0,.2);
+  transition:.4s;
 }
 
-.category:hover{
-    transform:translateY(-5px);
+.brand-card:hover{
+  transform:translateY(-9px);
+  border-color:rgba(90,210,255,.6);
+  box-shadow:0 25px 60px rgba(0,180,255,.15);
 }
 
-.category-icon{
-    font-size:40px;
-    margin-bottom:10px;
+.brand-top{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
 }
 
-/* Products */
-
-.products{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:22px;
+.brand-logo{
+  width:55px;
+  height:55px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:20px;
+  color:#fff;
+  background:linear-gradient(135deg,#18294b,#344c77);
+  border:1px solid rgba(255,255,255,.2);
 }
 
-.product{
-    background:white;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 6px 22px rgba(15,23,42,.08);
+.brand-name{
+  font-size:23px;
+  font-weight:900;
 }
+
+.model-list{
+  list-style:none;
+}
+
+.model-item{
+  margin:9px 0;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(0,0,0,.18);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.model-name{
+  font-size:14px;
+  line-height:1.4;
+}
+
+.whatsapp-btn{
+  flex-shrink:0;
+  text-decoration:none;
+  color:#fff;
+  background:#19c96b;
+  padding:8px 10px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.whatsapp-btn:hover{
+  background:#12a957;
+}
+
+/* ---------- IMAGE PLACEHOLDER ---------- */
 
 .product-image{
-    height:190px;
-    background:#e8edf5;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#64748b;
-    font-size:18px;
+  height:180px;
+  border-radius:18px;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    linear-gradient(135deg,rgba(0,198,255,.13),rgba(123,44,255,.16)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.025) 0,
+      rgba(255,255,255,.025) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  border:1px dashed rgba(255,255,255,.25);
+  color:#8fa3c0;
 }
 
-.product-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.product-image span{
+  font-size:14px;
 }
 
-.product-info{
-    padding:18px;
+/* ---------- USED ---------- */
+
+.used-box{
+  max-width:1000px;
+  margin:auto;
+  padding:45px 25px;
+  text-align:center;
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.15);
 }
 
-.product-info h3{
-    margin-bottom:6px;
+.used-box .big-icon{
+  font-size:55px;
+  margin-bottom:20px;
 }
 
-.product-info p{
-    color:#64748b;
-    font-size:14px;
+.used-box p{
+  color:#aebdd2;
+  line-height:1.7;
 }
 
-.price{
-    color:#0f7b45;
-    font-size:18px;
-    font-weight:bold;
-    margin-top:8px;
+/* ---------- AVAILABLE BRANDS ---------- */
+
+.brands-showcase{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
 }
 
-/* Brands */
-
-.brands{
-    background:white;
+.available-brand{
+  padding:17px 24px;
+  border-radius:18px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);
+  font-weight:900;
+  transition:.3s;
 }
 
-.brand-grid{
-    max-width:1100px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:16px;
+.available-brand:hover{
+  transform:translateY(-5px);
+  background:rgba(0,198,255,.12);
 }
 
-.brand{
-    border:1px solid #e2e8f0;
-    padding:20px;
-    text-align:center;
-    border-radius:12px;
-    font-weight:bold;
-    font-size:18px;
-}
+/* ---------- CONTACT ---------- */
 
-/* About */
-
-.about-box{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0 6px 22px rgba(15,23,42,.07);
-}
-
-/* Location */
-
-.location{
-    background:#071a3d;
-    color:white;
-}
-
-.location-box{
-    max-width:850px;
-    margin:auto;
-    text-align:center;
-}
-
-.location-box h2{
-    font-size:34px;
-    margin-bottom:20px;
-}
-
-.address{
-    font-size:20px;
-    line-height:2.2;
-}
-
-/* Contact */
-
-.contact-grid{
-    max-width:1000px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+.contact{
+  background:rgba(0,0,0,.16);
 }
 
 .contact-card{
-    background:white;
-    padding:30px;
-    text-align:center;
-    border-radius:18px;
-    box-shadow:0 6px 22px rgba(15,23,42,.08);
+  max-width:850px;
+  margin:auto;
+  text-align:center;
+  padding:45px 25px;
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.14);
 }
 
-.contact-card .icon{
-    font-size:40px;
-    margin-bottom:10px;
+.contact-card h2{
+  font-size:35px;
+  margin-bottom:15px;
 }
 
-.contact-card a{
-    color:#0759a8;
-    text-decoration:none;
-    font-weight:bold;
+.contact-card p{
+  color:#aebdd2;
+  line-height:1.8;
+  margin-bottom:25px;
 }
 
-/* Footer */
+.contact-number{
+  display:inline-block;
+  margin:7px;
+  padding:13px 18px;
+  border-radius:13px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* ---------- FOOTER ---------- */
 
 footer{
-    background:#030b1c;
-    color:#cbd5e1;
-    text-align:center;
-    padding:25px;
+  text-align:center;
+  padding:35px 20px;
+  color:#8393ab;
+  border-top:1px solid rgba(255,255,255,.1);
 }
 
-/* WhatsApp */
-
-.whatsapp{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    width:60px;
-    height:60px;
-    background:#25d366;
-    color:white;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:29px;
-    text-decoration:none;
-    z-index:1000;
-    box-shadow:0 5px 20px rgba(0,0,0,.25);
+footer strong{
+  color:#fff;
 }
 
-/* Responsive */
+/* ---------- ANIMATIONS ---------- */
 
-@media(max-width:900px){
-
-    .mobile-menu-btn{
-        display:block;
-    }
-
-    .menu{
-        display:none;
-        position:absolute;
-        top:65px;
-        right:0;
-        left:0;
-        background:#071a3d;
-        flex-direction:column;
-        padding:15px;
-    }
-
-    .menu.show{
-        display:flex;
-    }
-
-    .menu a,
-    .dropbtn{
-        width:100%;
-        text-align:center;
-    }
-
-    .dropdown{
-        width:100%;
-    }
-
-    .dropdown-content{
-        position:static;
-        width:100%;
-        margin-top:5px;
-    }
-
-    .dropdown:hover .dropdown-content{
-        display:none;
-    }
-
-    .dropdown.open .dropdown-content{
-        display:block;
-    }
-
-    .language{
-        margin-right:auto;
-    }
-
-    .navbar{
-        flex-wrap:wrap;
-    }
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(35px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
+
+@keyframes gradientMove{
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ---------- MOBILE ---------- */
 
 @media(max-width:600px){
 
-    section{
-        padding:55px 5%;
-    }
+  .navbar{
+    padding:12px 4%;
+  }
 
-    .hero{
-        min-height:75vh;
-    }
+  .logo{
+    font-size:16px;
+  }
 
-    .hero p{
-        font-size:16px;
-    }
+  .logo-icon{
+    width:36px;
+    height:36px;
+  }
 
-    .title h2{
-        font-size:28px;
-    }
+  .hero{
+    min-height:80vh;
+    padding:50px 18px;
+  }
 
+  section{
+    padding:60px 4%;
+  }
+
+  .model-item{
+    align-items:flex-start;
+  }
+
+  .whatsapp-btn{
+    font-size:10px;
+    padding:7px 8px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- NAVIGATION -->
+<nav class="navbar">
 
-<header>
+  <div class="logo">
+    <div class="logo-icon">📱</div>
+    <span data-en="Shahenshah Mobiles"
+          data-ur="شہنشاہ موبائلز">
+      Shahenshah Mobiles
+    </span>
+  </div>
 
-<div class="navbar">
-
-<div class="logo">
-📱 شہنشاہ موبائلز
-</div>
-
-<button class="mobile-menu-btn" onclick="toggleMenu()">
-☰
-</button>
-
-<div class="language">
-<button id="urduBtn" class="active" onclick="setLanguage('ur')">
-اردو
-</button>
-
-<button id="englishBtn" onclick="setLanguage('en')">
-English
-</button>
-</div>
-
-<nav class="menu" id="menu">
-
-<a href="#home" data-ur="ہوم" data-en="Home">ہوم</a>
-
-<div class="dropdown">
-
-<button class="dropbtn" onclick="toggleDropdown()"
-data-ur="📱 موبائلز ▾"
-data-en="📱 Mobiles ▾">
-📱 موبائلز ▾
-</button>
-
-<div class="dropdown-content">
-
-<a href="#new" data-ur="نئے موبائلز" data-en="New Mobiles">
-نئے موبائلز
-</a>
-
-<a href="#used" data-ur="استعمال شدہ موبائلز" data-en="Used Mobiles">
-استعمال شدہ موبائلز
-</a>
-
-</div>
-
-</div>
-
-<div class="dropdown">
-
-<button class="dropbtn" onclick="toggleDropdown()"
-data-ur="🏷️ کمپنیز ▾"
-data-en="🏷️ Brands ▾">
-🏷️ کمپنیز ▾
-</button>
-
-<div class="dropdown-content">
-
-<a href="#iphone">iPhone</a>
-<a href="#samsung">Samsung</a>
-<a href="#infinix">Infinix</a>
-<a href="#tecno">Tecno</a>
-<a href="#vivo">Vivo</a>
-<a href="#oppo">Oppo</a>
-<a href="#redmi">Redmi</a>
-<a href="#pixel">Google Pixel</a>
-<a href="#realme">Realme</a>
-
-</div>
-
-</div>
-
-<a href="#accessories"
-data-ur="🎧 Accessories"
-data-en="🎧 Accessories">
-🎧 Accessories
-</a>
-
-<a href="#location"
-data-ur="📍 پتہ"
-data-en="📍 Location">
-📍 پتہ
-</a>
-
-<a href="#contact"
-data-ur="📞 رابطہ"
-data-en="📞 Contact">
-📞 رابطہ
-</a>
+  <div class="nav-buttons">
+    <button class="lang-btn active" id="englishBtn">English</button>
+    <button class="lang-btn" id="urduBtn">Urdu</button>
+  </div>
 
 </nav>
 
-</div>
+
+<!-- HERO -->
+<header class="hero">
+
+  <div class="hero-content">
+
+    <div class="welcome"
+         data-en="Welcome to Shahenshah Mobile Zone"
+         data-ur="شہنشاہ موبائل زون میں خوش آمدید">
+      Welcome to Shahenshah Mobile Zone
+    </div>
+
+    <h1
+      data-en="Shahenshah Mobile Zone"
+      data-ur="شہنشاہ موبائل زون">
+      Shahenshah Mobile Zone
+    </h1>
+
+    <p
+      data-en="Discover box-packed new mobile phones from the world's leading brands. Ask us for the latest price directly on WhatsApp."
+      data-ur="دنیا کے معروف برانڈز کے باکس پیک نئے موبائل فونز دیکھیں۔ تازہ قیمت کے لیے براہ راست WhatsApp پر رابطہ کریں۔">
+      Discover box-packed new mobile phones from the world's leading brands.
+      Ask us for the latest price directly on WhatsApp.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="#new-phones" class="btn btn-primary"
+         data-en="Explore New Phones"
+         data-ur="نئے موبائل دیکھیں">
+        Explore New Phones
+      </a>
+
+      <a href="#contact" class="btn btn-secondary"
+         data-en="Contact Us"
+         data-ur="رابطہ کریں">
+        Contact Us
+      </a>
+
+    </div>
+
+  </div>
 
 </header>
 
 
-<!-- HERO -->
+<!-- NEW BOX PACK PHONES -->
+<section id="new-phones">
 
-<section class="hero" id="home">
+  <div class="section-title reveal">
 
-<div class="hero-content">
+    <h2
+      data-en="📦 Box Pack New Phones"
+      data-ur="📦 باکس پیک نئے موبائل">
+      📦 Box Pack New Phones
+    </h2>
 
-<h1 data-ur="شہنشاہ موبائلز"
-data-en="Shehenshah Mobiles">
-شہنشاہ موبائلز
-</h1>
+    <p
+      data-en="Latest box-packed mobile phones available at our shop"
+      data-ur="ہماری دکان پر دستیاب تازہ باکس پیک موبائل فونز">
+      Latest box-packed mobile phones available at our shop
+    </p>
 
-<p data-ur="حب چوکی، بلوچستان میں موبائل فونز، Used Mobiles اور Accessories کے لیے آپ کی اپنی دکان"
-data-en="Your mobile shop in Hub Chowki, Balochistan for new phones, used mobiles and accessories">
-حب چوکی، بلوچستان میں موبائل فونز، Used Mobiles اور Accessories کے لیے آپ کی اپنی دکان
-</p>
+  </div>
 
-<a class="btn btn-whatsapp"
-href="https://wa.me/923331261661"
-target="_blank"
-data-ur="💬 WhatsApp پر رابطہ"
-data-en="💬 Contact on WhatsApp">
-💬 WhatsApp پر رابطہ
-</a>
 
-<a class="btn btn-light"
-href="#new"
-data-ur="📱 موبائلز دیکھیں"
-data-en="📱 View Mobiles">
-📱 موبائلز دیکھیں
-</a>
+  <div class="phone-grid">
 
-</div>
 
-</section>
+    <!-- SAMSUNG -->
+    <div class="brand-card reveal">
 
+      <div class="product-image">
+        <span>📦 Samsung Box Pack Image<br>Add your Samsung image here</span>
+      </div>
 
-<!-- CATEGORIES -->
+      <div class="brand-top">
+        <div class="brand-logo">S</div>
+        <div class="brand-name">Samsung</div>
+      </div>
 
-<section>
+      <ul class="model-list">
 
-<div class="title">
+        <li class="model-item">
+          <span class="model-name">Galaxy S25 / S25 Ultra</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Assalamualaikum%2C%20I%20came%20from%20the%20Shahenshah%20Mobile%20Zone%20website.%20Please%20tell%20me%20the%20price%20of%20Samsung%20Galaxy%20S25%20%2F%20S25%20Ultra." target="_blank">Ask Price</a>
+        </li>
 
-<h2 data-ur="ہماری Categories"
-data-en="Our Categories">
-ہماری Categories
-</h2>
+        <li class="model-item">
+          <span class="model-name">Galaxy S24 Ultra</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=I%20came%20from%20the%20Shahenshah%20Mobile%20Zone%20website.%20Please%20tell%20me%20the%20price%20of%20Samsung%20Galaxy%20S24%20Ultra." target="_blank">Ask Price</a>
+        </li>
 
-<p data-ur="اپنی مطلوبہ چیز آسانی سے تلاش کریں"
-data-en="Find what you need easily">
-اپنی مطلوبہ چیز آسانی سے تلاش کریں
-</p>
+        <li class="model-item">
+          <span class="model-name">Galaxy Z Fold 6 / Z Flip 6</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Samsung%20Galaxy%20Z%20Fold%206%20%2F%20Z%20Flip%206." target="_blank">Ask Price</a>
+        </li>
 
-</div>
+        <li class="model-item">
+          <span class="model-name">Galaxy A55 / A35 5G</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Samsung%20Galaxy%20A55%20%2F%20A35%205G." target="_blank">Ask Price</a>
+        </li>
 
-<div class="categories">
+        <li class="model-item">
+          <span class="model-name">Galaxy A25 / A15 / A16</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Samsung%20Galaxy%20A25%20%2F%20A15%20%2F%20A16." target="_blank">Ask Price</a>
+        </li>
 
-<a class="category" href="#new">
-<div class="category-icon">🆕</div>
-<h3 data-ur="نئے موبائلز" data-en="New Mobiles">
-نئے موبائلز
-</h3>
-</a>
+        <li class="model-item">
+          <span class="model-name">Galaxy A06 / A05 / A05s / A04</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Samsung%20Galaxy%20A06%20%2F%20A05%20%2F%20A05s%20%2F%20A04." target="_blank">Ask Price</a>
+        </li>
 
-<a class="category" href="#used">
-<div class="category-icon">♻️</div>
-<h3 data-ur="Used Mobiles" data-en="Used Mobiles">
-Used Mobiles
-</h3>
-</a>
+      </ul>
+    </div>
 
-<a class="category" href="#brands">
-<div class="category-icon">📱</div>
-<h3 data-ur="موبائل کمپنیز" data-en="Mobile Brands">
-موبائل کمپنیز
-</h3>
-</a>
 
-<a class="category" href="#accessories">
-<div class="category-icon">🎧</div>
-<h3 data-ur="Accessories" data-en="Accessories">
-Accessories
-</h3>
-</a>
+    <!-- APPLE -->
+    <div class="brand-card reveal">
 
-</div>
+      <div class="product-image">
+        <span>📦 Apple Box Pack Image<br>Add your Apple image here</span>
+      </div>
 
-</section>
+      <div class="brand-top">
+        <div class="brand-logo"></div>
+        <div class="brand-name">Apple iPhone</div>
+      </div>
 
+      <ul class="model-list">
 
-<!-- NEW MOBILES -->
+        <li class="model-item">
+          <span class="model-name">iPhone 17 / 17 Pro / 17 Pro Max</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Apple%20iPhone%2017%20series." target="_blank">Ask Price</a>
+        </li>
 
-<section id="new">
+        <li class="model-item">
+          <span class="model-name">iPhone Air</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Apple%20iPhone%20Air." target="_blank">Ask Price</a>
+        </li>
 
-<div class="title">
+        <li class="model-item">
+          <span class="model-name">iPhone 16 / 16 Plus / 16 Pro Max</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Apple%20iPhone%2016%20series." target="_blank">Ask Price</a>
+        </li>
 
-<h2 data-ur="🆕 نئے موبائلز"
-data-en="🆕 New Mobiles">
-🆕 نئے موبائلز
-</h2>
+        <li class="model-item">
+          <span class="model-name">iPhone 15 / 15 Pro</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Apple%20iPhone%2015%20%2F%2015%20Pro." target="_blank">Ask Price</a>
+        </li>
 
-<p data-ur="نئے موبائل فونز"
-data-en="New mobile phones">
-نئے موبائل فونز
-</p>
+        <li class="model-item">
+          <span class="model-name">iPhone 14 Series</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Apple%20iPhone%2014%20series." target="_blank">Ask Price</a>
+        </li>
 
-</div>
+        <li class="model-item">
+          <span class="model-name">iPhone 13 / 12</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Apple%20iPhone%2013%20%2F%2012." target="_blank">Ask Price</a>
+        </li>
 
-<div class="products">
+      </ul>
+    </div>
 
-<div class="product">
 
-<div class="product-image">
-📷 موبائل کی تصویر
-</div>
+    <!-- XIAOMI -->
+    <div class="brand-card reveal">
 
-<div class="product-info">
+      <div class="product-image">
+        <span>📦 Xiaomi / Redmi Box Pack Image<br>Add your image here</span>
+      </div>
 
-<h3>iPhone</h3>
+      <div class="brand-top">
+        <div class="brand-logo">mi</div>
+        <div class="brand-name">Xiaomi / Redmi</div>
+      </div>
 
-<p data-ur="نیا موبائل"
-data-en="New Mobile">
-نیا موبائل
-</p>
+      <ul class="model-list">
 
-<div class="price">
-قیمت: رابطہ کریں
-</div>
+        <li class="model-item">
+          <span class="model-name">Redmi Note 14 Pro / Pro+</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Redmi%20Note%2014%20Pro%20%2F%20Pro%2B." target="_blank">Ask Price</a>
+        </li>
+
+        <li class="model-item">
+          <span class="model-name">Redmi Note 13 / 13 Pro</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Redmi%20Note%2013%20%2F%2013%20Pro." target="_blank">Ask Price</a>
+        </li>
+
+        <li class="model-item">
+          <span class="model-name">Redmi 14C / 13C</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Redmi%2014C%20%2F%2013C." target="_blank">Ask Price</a>
+        </li>
 
-</div>
+        <li class="model-item">
+          <span class="model-name">Redmi A3 / A2+</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Redmi%20A3%20%2F%20A2%2B." target="_blank">Ask Price</a>
+        </li>
 
-</div>
+        <li class="model-item">
+          <span class="model-name">Xiaomi 14 / 14T / 13T</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Xiaomi%2014%20%2F%2014T%20%2F%2013T." target="_blank">Ask Price</a>
+        </li>
 
+      </ul>
+    </div>
 
-<div class="product">
 
-<div class="product-image">
-📷 موبائل کی تصویر
-</div>
+    <!-- VIVO -->
+    <div class="brand-card reveal">
 
-<div class="product-info">
+      <div class="product-image">
+        <span>📦 Vivo Box Pack Image<br>Add your Vivo image here</span>
+      </div>
 
-<h3>Samsung</h3>
+      <div class="brand-top">
+        <div class="brand-logo">vivo</div>
+        <div class="brand-name">Vivo</div>
+      </div>
 
-<p>New Mobile</p>
+      <ul class="model-list">
 
-<div class="price">
-Price: Contact Us
-</div>
+        <li class="model-item">
+          <span class="model-name">Vivo V40 / V40 Pro</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Vivo%20V40%20%2F%20V40%20Pro." target="_blank">Ask Price</a>
+        </li>
 
-</div>
+        <li class="model-item">
+          <span class="model-name">Vivo V30 / V30e / V29e</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Vivo%20V30%20%2F%20V30e%20%2F%20V29e." target="_blank">Ask Price</a>
+        </li>
 
-</div>
+        <li class="model-item">
+          <span class="model-name">Vivo Y28 / Y27s / Y18</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Vivo%20Y28%20%2F%20Y27s%20%2F%20Y18." target="_blank">Ask Price</a>
+        </li>
 
+        <li class="model-item">
+          <span class="model-name">Vivo Y03 / Y02</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Vivo%20Y03%20%2F%20Y02." target="_blank">Ask Price</a>
+        </li>
 
-<div class="product">
+        <li class="model-item">
+          <span class="model-name">Vivo X100 Pro / X90 Pro</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Vivo%20X100%20Pro%20%2F%20X90%20Pro." target="_blank">Ask Price</a>
+        </li>
 
-<div class="product-image">
-📷 موبائل کی تصویر
-</div>
+      </ul>
+    </div>
 
-<div class="product-info">
 
-<h3>Infinix</h3>
+    <!-- OPPO -->
+    <div class="brand-card reveal">
 
-<p>New Mobile</p>
+      <div class="product-image">
+        <span>📦 Oppo Box Pack Image<br>Add your Oppo image here</span>
+      </div>
 
-<div class="price">
-Price: Contact Us
-</div>
+      <div class="brand-top">
+        <div class="brand-logo">OPPO</div>
+        <div class="brand-name">Oppo</div>
+      </div>
 
-</div>
+      <ul class="model-list">
 
-</div>
+        <li class="model-item">
+          <span class="model-name">Oppo Reno 12 / Reno 12 F</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Oppo%20Reno%2012%20%2F%20Reno%2012%20F." target="_blank">Ask Price</a>
+        </li>
 
+        <li class="model-item">
+          <span class="model-name">Oppo Reno 11 Series</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Oppo%20Reno%2011%20series." target="_blank">Ask Price</a>
+        </li>
 
-<div class="product">
+        <li class="model-item">
+          <span class="model-name">Oppo Reno 10</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Oppo%20Reno%2010." target="_blank">Ask Price</a>
+        </li>
 
-<div class="product-image">
-📷 موبائل کی تصویر
-</div>
+        <li class="model-item">
+          <span class="model-name">Oppo A60 / A58 / A38</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Oppo%20A60%20%2F%20A58%20%2F%20A38." target="_blank">Ask Price</a>
+        </li>
 
-<div class="product-info">
+        <li class="model-item">
+          <span class="model-name">Oppo A18 / A78</span>
+          <a class="whatsapp-btn" href="https://wa.me/923337055360?text=Please%20tell%20me%20the%20price%20of%20Oppo%20A18%20%2F%20A78." target="_blank">Ask Price</a>
+        </li>
 
-<h3>Tecno</h3>
+      </ul>
+    </div>
 
-<p>New Mobile</p>
 
-<div class="price">
-Price: Contact Us
-</div>
+    <!-- INFINIX -->
+    <div class="brand-card reveal">
 
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- USED MOBILES -->
-
-<section id="used" style="background:#eef3f8;">
-
-<div class="title">
-
-<h2 data-ur="♻️ استعمال شدہ موبائلز"
-data-en="♻️ Used Mobiles">
-♻️ استعمال شدہ موبائلز
-</h2>
-
-<p data-ur="Used موبائلز کی تفصیلات اور قیمت کے لیے WhatsApp کریں"
-data-en="Contact us on WhatsApp for used mobile details and prices">
-Used موبائلز کی تفصیلات اور قیمت کے لیے WhatsApp کریں
-</p>
-
-</div>
-
-<div class="products">
-
-<div class="product">
-
-<div class="product-image">
-📷 Used Mobile
-</div>
-
-<div class="product-info">
-
-<h3>Used iPhone</h3>
-
-<p data-ur="Condition: بعد میں درج کریں"
-data-en="Condition: Add later">
-Condition: بعد میں درج کریں
-</p>
-
-<div class="price">
-Price: Contact Us
-</div>
-
-</div>
-
-</div>
-
-
-<div class="product">
-
-<div class="product-image">
-📷 Used Mobile
-</div>
-
-<div class="product-info">
-
-<h3>Used Samsung</h3>
-
-<p>Condition: Add later</p>
-
-<div class="price">
-Price: Contact Us
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- BRANDS -->
-
-<section class="brands" id="brands">
-
-<div class="title">
-
-<h2 data-ur="🏷️ موبائل کمپنیز"
-data-en="🏷️ Mobile Brands">
-🏷️ موبائل کمپنیز
-</h2>
-
-</div>
-
-<div class="brand-grid">
-
-<div class="brand" id="iphone">🍎 iPhone</div>
-
-<div class="brand" id="samsung">📱 Samsung</div>
-
-<div class="brand" id="infinix">📱 Infinix</div>
-
-<div class="brand" id="tecno">📱 Tecno</div>
-
-<div class="brand" id="vivo">📱 Vivo</div>
-
-<div class="brand" id="oppo">📱 Oppo</div>
-
-<div class="brand" id="redmi">📱 Redmi</div>
-
-<div class="brand" id="pixel">🔵 Google Pixel</div>
-
-<div class="brand" id="realme">📱 Realme</div>
-
-</div>
-
-</section>
-
-
-<!-- ACCESSORIES -->
-
-<section id="accessories">
-
-<div class="title">
-
-<h2>🎧 Accessories</h2>
-
-<p data-ur="موبائل Accessories کے لیے ہم سے رابطہ کریں"
-data-en="Contact us for mobile accessories">
-موبائل Accessories کے لیے ہم سے رابطہ کریں
-</p>
-
-</div>
-
-<div class="categories">
-
-<div class="category">
-<div class="category-icon">🎧</div>
-<h3>Earphones</h3>
-</div>
-
-<div class="category">
-<div class="category-icon">🔌</div>
-<h3>Chargers</h3>
-</div>
-
-<div class="category">
-<div class="category-icon">🔋</div>
-<h3>Power Banks</h3>
-</div>
-
-<div class="category">
-<div class="category-icon">🛡️</div>
-<h3>Mobile Covers</h3>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section>
-
-<div class="title">
-
-<h2 data-ur="شہنشاہ موبائلز"
-data-en="About Shehenshah Mobiles">
-شہنشاہ موبائلز
-</h2>
-
-</div>
-
-<div class="about-box">
-
-<p data-ur="شہنشاہ موبائلز حب چوکی، ڈسٹرکٹ لسبیلہ، بلوچستان میں واقع موبائل شاپ ہے۔ ہمارے پاس مختلف معروف موبائل کمپنیوں کے موبائل فونز دستیاب ہیں۔"
-data-en="Shehenshah Mobiles is a mobile shop located in Hub Chowki, District Lasbela, Balochistan. We offer mobile phones from various popular brands.">
-شہنشاہ موبائلز حب چوکی، ڈسٹرکٹ لسبیلہ، بلوچستان میں واقع موبائل شاپ ہے۔ ہمارے پاس مختلف معروف موبائل کمپنیوں کے موبائل فونز دستیاب ہیں۔
-</p>
-
-</div>
-
-</section>
-
-
-<!-- LOCATION -->
-
-<section class="location" id="location">
-
-<div class="location-box">
-
-<h2 data-ur="📍 ہماری دکان"
-data-en="📍 Our Shop">
-📍 ہماری دکان
-</h2>
-
-<div class="address">
-
-<strong>شہنشاہ موبائلز</strong>
-
-<br>
-
-بلوچستان
-
-<br>
-
-ڈسٹرکٹ لسبیلہ
-
-<br>
-
-حب چوکی
-
-<br>
-
-شیخ ابراہیم مارکیٹ
-
-<br>
-
-شاپ نمبر 23
-
-</div>
-
-<br>
-
-<a class="btn btn-light"
-href="https://www.google.com/maps/search/?api=1&query=Sheikh+Ibrahim+Market+Hub+Balochistan"
-target="_blank">
-
-📍 Google Maps
-
-</a>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section id="contact">
-
-<div class="title">
-
-<h2 data-ur="📞 رابطہ کریں"
-data-en="📞 Contact Us">
-📞 رابطہ کریں
-</h2>
-
-</div>
-
-<div class="contact-grid">
-
-<div class="contact-card">
-
-<div class="icon">💬</div>
-
-<h3>WhatsApp</h3>
-
-<br>
-
-<a href="https://wa.me/923331261661"
-target="_blank">
-
-0333-3126161
-
-</a>
-
-</div>
-
-
-<div class="contact-card">
-
-<div class="icon">📍</div>
-
-<h3 data-ur="پتہ" data-en="Address">
-پتہ
-</h3>
-
-<br>
-
-<p>
-شیخ ابراہیم مارکیٹ،
-شاپ نمبر 23،
-حب چوکی،
-ڈسٹرکٹ لسبیلہ،
-بلوچستان
-</p>
-
-</div>
-
-
-<div class="contact-card">
-
-<div class="icon">📱</div>
-
-<h3 data-ur="دستیاب برانڈز"
-data-en="Available Brands">
-دستیاب برانڈز
-</h3>
-
-<br>
-
-<p>
-iPhone • Samsung • Infinix • Tecno • Vivo
-• Oppo • Redmi • Pixel • Realme
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- WHATSAPP -->
-
-<a class="whatsapp"
-href="https://wa.me/923331261661"
-target="_blank">
-💬
-</a>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<p data-ur="© 2026 شہنشاہ موبائلز — تمام حقوق محفوظ ہیں۔"
-data-en="© 2026 Shehenshah Mobiles — All Rights Reserved.">
-© 2026 شہنشاہ موبائلز — تمام حقوق محفوظ ہیں۔
-</p>
-
-<p>
-Hub Chowki, District Lasbela, Balochistan
-</p>
-
-</footer>
-
-
-<script>
-
-/* Mobile Menu */
-
-function toggleMenu(){
-
-    document.getElementById("menu")
-    .classList.toggle("show");
-
-}
-
-
-/* Dropdown */
-
-function toggleDropdown(){
-
-    event.currentTarget
-    .parentElement
-    .classList.toggle("open");
-
-}
-
-
-/* Language */
-
-function setLanguage(language){
-
-    const elements =
-        document.querySelectorAll("[data-ur]");
-
-    elements.forEach(function(element){
-
-        if(language === "ur"){
-
-            element.textContent =
-                element.getAttribute("data-ur");
-
-        }else{
-
-            element.textContent =
-                element.getAttribute("data-en");
-
-        }
-
-    });
-
-
-    if(language === "ur"){
-
-        document.documentElement.lang = "ur";
-        document.documentElement.dir = "rtl";
-
-        document.getElementById("urduBtn")
-            .classList.add("active");
-
-        document.getElementById("englishBtn")
-            .classList.remove("active");
-
-    }else{
-
-        document.documentElement.lang = "en";
-        document.documentElement.dir = "ltr";
-
-        document.getElementById("englishBtn")
-            .classList.add("active");
-
-        document.getElementById("urduBtn")
-            .classList.remove("active");
-
-    }
-
-}
-
-</script>
-
-</body>
-  </html>
+      <div clas
